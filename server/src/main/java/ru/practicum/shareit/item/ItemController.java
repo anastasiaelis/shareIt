@@ -72,11 +72,4 @@ public class ItemController {
         log.info("POST Запрос на создание комментария id = {}", itemId);
         return itemService.createComment(userId, commentDto, itemId);
     }
-
-    @PatchMapping("/{itemId}")
-    public ItemDtoOut update(@RequestHeader("X-Sharer-User-Id") Long userId,
-                             @PathVariable Long itemId,
-                             @RequestBody ItemDto itemDto) {
-        return itemService.update(userId, itemId, itemDto);
-    }
 }
