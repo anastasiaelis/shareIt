@@ -64,4 +64,11 @@ public class BookingController {
         log.info("GET запрос на получение списка всех бронирований текущего владельца с id: {} и статусом {}", ownerId, bookingState);
         return bookingService.findAllOwner(ownerId, bookingState, from, size);
     }
+
+    @PatchMapping("/{bookingId}")
+    public BookingDtoOut setApproved(@RequestHeader("X-Sharer-User-Id") Long userId,
+                                     @PathVariable Long bookingId,
+                                     @RequestParam Boolean approved) {
+        return bookingService.setApproved(userId, bookingId, approved);
+    }
 }

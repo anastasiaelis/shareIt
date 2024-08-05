@@ -12,6 +12,7 @@ import ru.practicum.shareit.item.service.ItemService;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
+
 import java.util.List;
 
 @Slf4j
@@ -70,5 +71,12 @@ public class ItemController {
                                        @PathVariable Long itemId) {
         log.info("POST Запрос на создание комментария id = {}", itemId);
         return itemService.createComment(userId, commentDto, itemId);
+    }
+
+    @PatchMapping("/{itemId}")
+    public ItemDtoOut update(@RequestHeader("X-Sharer-User-Id") Long userId,
+                             @PathVariable Long itemId,
+                             @RequestBody ItemDto itemDto) {
+        return itemService.update(userId, itemId, itemDto);
     }
 }

@@ -46,6 +46,7 @@ public class BookingController {
         log.info("Get booking {}, userId={}", bookingId, userId);
         return bookingClient.getBooking(userId, bookingId);
     }
+
     @GetMapping("/owner")
     public ResponseEntity<Object> findAllByOwnerAndStatus(
             @RequestHeader("X-Sharer-User-Id") Long userId,
