@@ -52,4 +52,6 @@ public class BookingController {
 		log.info("Get booking {}, userId={}", bookingId, userId);
 		return bookingClient.getBooking(userId, bookingId);
 	}
+
+
 }

@@ -83,7 +83,7 @@ class BookingControllerTest {
         assertEquals(objectMapper.writeValueAsString(bookingDtoOut), result);
     }
 
-    /*@Test
+    @Test
     @SneakyThrows
     void createBookingWhenBookingIsNotValid() {
         bookingDto.setItemId(null);
@@ -99,7 +99,7 @@ class BookingControllerTest {
                 .andExpect(status().isBadRequest());
 
         verify(bookingService, never()).add(user.getId(), bookingDto);
-    }*/
+    }
 
     /*@Test
     @SneakyThrows
