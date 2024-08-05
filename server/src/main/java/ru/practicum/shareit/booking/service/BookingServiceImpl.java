@@ -192,28 +192,4 @@ public class BookingServiceImpl implements BookingService {
             return bookingById;
         }
     }
-
-    @Override
-    public BookingDtoOut setApproved(Long userId, Long bookingId, Boolean approved) {
-        Booking booking = bookingRepository.findById(bookingId).orElseThrow(() -> {
-            throw new NotFoundException("Booking id = " + bookingId + " not found!");
-        });
-        //if (!userService.getUser(userId).is) {
-        //  throw new ValidationException("User id = " + userId + " not found!");
-        //}
-        if (!booking.getItem().getOwner().getId().equals(userId)) {
-            throw new NotFoundException("Only owner can set approved!");
-        }
-        if (booking.getStatus().equals(BookingStatus.APPROVED)) {
-            throw new ValidationException("Status is APPROVED!");
-        }
-        if (approved) {
-            booking.setStatus(BookingStatus.APPROVED);
-        } else {
-            booking.setStatus(BookingStatus.REJECTED);
-        }
-        bookingRepository.save(booking);
-        return BookingMapper.toBookingOut(booking);
-    }
-
 }

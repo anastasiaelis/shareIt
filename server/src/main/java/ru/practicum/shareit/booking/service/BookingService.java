@@ -16,6 +16,4 @@ public interface BookingService {
     List<BookingDtoOut> findAll(Long userId, String state, Integer from, Integer size);
 
     List<BookingDtoOut> findAllOwner(Long userId, String state, Integer from, Integer size);
-
-    BookingDtoOut setApproved(Long userId, Long bookingId, Boolean approved);
 }
