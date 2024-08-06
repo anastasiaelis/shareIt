@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.shareit.exceptions.NotFoundException;
 import ru.practicum.shareit.user.service.UserService;
 
-//import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @Transactional
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
@@ -23,14 +23,14 @@ public class UserServiceIT {
             .email("my@email.com")
             .build();
 
-   /* @Test
+    @Test
     void addNewUser() {
         UserDto actualUserDto = userService.addUser(userDto);
 
         assertEquals(1L, actualUserDto.getId());
         assertEquals("name", actualUserDto.getName());
         assertEquals("my@email.com", actualUserDto.getEmail());
-    }*/
+    }
 
     @Test
     void getUserByIdWhenUserIdIsNotValid() {

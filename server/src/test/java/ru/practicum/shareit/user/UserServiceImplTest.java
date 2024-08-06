@@ -46,26 +46,6 @@ class UserServiceImplTest {
         verify(userRepository).save(userToSave);
     }
 
-//    @Test
-//    void updateUserTest() {
-//        User user = User.builder().id(1L).name("name").email("my@email.com").build();
-//        Long userId = user.getId();
-//        userRepository.save(user);
-//        UserDto fieldsToUpdate = new UserDto();
-//        fieldsToUpdate.setId(1L);
-//        fieldsToUpdate.setEmail("updated@example.com");
-//        fieldsToUpdate.setName("Updated User");
-//      User usere= userRepository.getUserById(userId);
-//      //  when(userRepository.getUserById(userId)).thenReturn(user);
-//      //  when(userRepository.save(user)).thenReturn(user);
-//
-//        UserDto updatedUserDto = userService.update(fieldsToUpdate);
-//        assertNotNull(updatedUserDto);
-//      assertEquals("Updated User", updatedUserDto.getName());
-//       assertEquals("updated@example.com", updatedUserDto.getEmail());
-//    }
-
-
     @Test
     void findUserByIdWhenUserFound() {
         long userId = 1L;
@@ -74,13 +54,10 @@ class UserServiceImplTest {
                 .thenReturn(true);
         when(userRepository.findById(expectedUser.getId()))
                 .thenReturn(Optional.of(expectedUser));
-        //  when(userService.getUser(expectedUser.getId()))
-        //      .thenReturn(userMapper.toUserDto(expectedUser));
 
         assertThat(userService.getUser(expectedUser.getId()))
                 .isNotNull()
                 .usingRecursiveComparison();
-        //  .isEqualTo(expectedUser);
     }
 
     @Test

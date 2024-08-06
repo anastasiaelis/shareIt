@@ -7,20 +7,21 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.shareit.booking.dto.BookingDto;
-//import ru.practicum.shareit.booking.dto.BookingDtoOut;
-//import ru.practicum.shareit.booking.model.BookingState;
-//import ru.practicum.shareit.booking.model.BookingStatus;
+import ru.practicum.shareit.booking.dto.BookingDtoOut;
+import ru.practicum.shareit.booking.model.BookingState;
+import ru.practicum.shareit.booking.model.BookingStatus;
 import ru.practicum.shareit.booking.service.BookingService;
 import ru.practicum.shareit.exceptions.NotFoundException;
 import ru.practicum.shareit.item.dto.ItemDto;
 import ru.practicum.shareit.item.service.ItemService;
+import ru.practicum.shareit.user.User;
 import ru.practicum.shareit.user.UserDto;
 import ru.practicum.shareit.user.service.UserService;
 
 import java.time.LocalDateTime;
-//import java.util.List;
+import java.util.List;
 
-//import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @Transactional
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
@@ -35,10 +36,14 @@ public class BookingServiceIT {
 
     @Autowired
     private ItemService itemService;
-
+    private final User owner = User.builder()
+            .id(2L)
+            .name("TestOwnerName")
+            .email("OwnerEmail@test.com")
+            .build();
     private final UserDto userDto1 = UserDto.builder()
             .name("name1")
-            .email("email1@email.com")
+            .email("email1@mail.com")
             .build();
 
     private final UserDto userDto2 = UserDto.builder()
@@ -64,35 +69,6 @@ public class BookingServiceIT {
             .end(LocalDateTime.now().plusSeconds(11L))
             .build();
 
-    /*@Test
-    void addBooking() {
-        UserDto addedUser1 = userService.addUser(userDto1);
-        UserDto addedUser2 = userService.addUser(userDto2);
-        itemService.add(addedUser1.getId(), itemDto1);
-        itemService.add(addedUser2.getId(), itemDto2);
-
-        BookingDtoOut bookingDtoOut1 = bookingService.add(addedUser1.getId(), bookingDto1);
-        BookingDtoOut bookingDtoOut2 = bookingService.add(addedUser1.getId(), bookingDto1);
-
-        assertEquals(1L, bookingDtoOut1.getId());
-        assertEquals(2L, bookingDtoOut2.getId());
-        assertEquals(BookingStatus.WAITING, bookingDtoOut1.getStatus());
-        assertEquals(BookingStatus.WAITING, bookingDtoOut2.getStatus());
-
-        BookingDtoOut updatedBookingDto1 = bookingService.update(addedUser2.getId(),
-                bookingDtoOut1.getId(), true);
-        BookingDtoOut updatedBookingDto2 = bookingService.update(addedUser2.getId(),
-                bookingDtoOut2.getId(), true);
-
-        assertEquals(BookingStatus.APPROVED, updatedBookingDto1.getStatus());
-        assertEquals(BookingStatus.APPROVED, updatedBookingDto2.getStatus());
-
-        List<BookingDtoOut> bookingsDtoOut = bookingService.findAllOwner(addedUser2.getId(),
-                BookingState.ALL.toString(), 0, 10);
-
-        assertEquals(2, bookingsDtoOut.size());
-    }*/
-
     @Test
     void update_whenBookingIdAndUserIdIsNotValid_thenThrowObjectNotFoundException() {
         Long userId = 3L;
@@ -102,4 +78,5 @@ public class BookingServiceIT {
                 .assertThrows(NotFoundException.class,
                         () -> bookingService.update(userId, bookingId, true));
     }
+
 }

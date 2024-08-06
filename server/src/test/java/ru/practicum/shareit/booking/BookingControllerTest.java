@@ -83,56 +83,6 @@ class BookingControllerTest {
         assertEquals(objectMapper.writeValueAsString(bookingDtoOut), result);
     }
 
-    /*@Test
-    @SneakyThrows
-    void createBookingWhenBookingIsNotValid() {
-        bookingDto.setItemId(null);
-        bookingDto.setStart(null);
-        bookingDto.setEnd(null);
-
-        when(bookingService.add(user.getId(), bookingDto)).thenReturn(bookingDtoOut);
-
-        mockMvc.perform(post("/bookings")
-                        .contentType("application/json")
-                        .header(USER_HEADER, user.getId())
-                        .content(objectMapper.writeValueAsString(bookingDto)))
-                .andExpect(status().isBadRequest());
-
-        verify(bookingService, never()).add(user.getId(), bookingDto);
-    }*/
-
-    /*@Test
-    @SneakyThrows
-    void findAllBookingShouldReturnBadRequest() {
-        Integer from = -1;
-        Integer size = 10;
-
-        mockMvc.perform(get("/bookings")
-                        .param("from", String.valueOf(from))
-                        .param("size", String.valueOf(size))
-                        .contentType("application/json")
-                        .header(USER_HEADER, user.getId()))
-                .andExpect(status().isBadRequest());
-
-        verify(bookingService, never()).findAll(user.getId(), "ALL", from, size);
-    }*/
-
-    /*@Test
-    @SneakyThrows
-    void getAllOwnerShouldReturnBadRequest() {
-        Integer from = -1;
-        Integer size = 10;
-
-        mockMvc.perform(get("/bookings/owner")
-                        .param("from", String.valueOf(from))
-                        .param("size", String.valueOf(size))
-                        .contentType("application/json")
-                        .header(USER_HEADER, user.getId()))
-                .andExpect(status().isBadRequest());
-
-        verify(bookingService, never()).findAllOwner(user.getId(), "ALL", from, size);
-    }*/
-
     @Test
     @SneakyThrows
     void updateWhenBookingIsValid() {
